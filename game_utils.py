@@ -118,14 +118,27 @@ class game:
 			3.not hindered by units (for slide and move)
 		after normal movement check, look up for commanding tiles and put additional cmd movement in
 		'''
-
+		
+		if self.turns == 1:
+			if self.player==1: vl=["oF1","oF2","oF3","oF4","oF5","oF6"]
+			if self.player==0: vl=["oA1","oA2","oA3","oA4","oA5","oA6"]
+			return
 		#do normal movement check	
 		for tile_start in self.board_dict.keys(): #--tuple
+			if (tile_start.player != self.player): continue
 			u=self.board_dict[tile_start]
 			u_name=self.board_arr[tile_start]
 			u_loc=self.position(coord=None,pair=tile_start)
 			for move_type in u.moves[u.side].keys():
-				
+				if move_type =='o':
+					u_op='o'
+					for dest in u.moves[u.side][move.type]:
+						if (dest[0]>=0 or dest[0]<=5 or dest[1]>=0 or dest[1]<=5) and self.is_occupied(dest):
+							u_tar=self.position(coord=None,pair=dest)
+							u_move=u_op+u_tar
+							vl.append(u.move)
+					if (self.turns<=3): return
+
 				if move_type == 'm':
 					u_op='m'
 					for tar in u.moves[u.side][move_type]:
@@ -193,8 +206,8 @@ class game:
 					u_op='x'
 					for tar in u.moves[u.side][move_type]:
 						dest = (tar[0]+pos[0],tar[1]+pos[1])
-						if (dest[0]<0 or dest[0]>5 or dest[1]<0 or dest[1]>5) or self.is_friendly(player,dest):
-							#jump cannot end up in out-of-bound or friendly tiles
+						if (dest[0]<0 or dest[0]>5 or dest[1]<0 or dest[1]>5) or self.is_friendly(player,dest) or (self.is_occupied(dest)!=True):
+							#strike cannot end up in out-of-bound or or empty or friendly tiles
 							break
 						#anything reaching this line would be valid slide moves, translate and put into vl 
 						u_tar=self.position(coord=None,pair=dest)
