@@ -27,11 +27,11 @@ class game:
 	    #initialize both decks
 	    self.deck=[]
 	    self.deck[0]=['F','P','P','P','K','S','W','C','G','E','N','A','R','T','B','L']
-	    np.random.shuffle(self.whitequeue)
+	    np.random.shuffle(self.deck[0])
 	    self.deck[0]=np.concatenate((['D','F','F'],self.deck[0]))
 	    
 	    self.deck[1]=['f','p','p','p','k','s','w','c','g','e','n','a','r','t','b','l']
-	    np.random.shuffle(self.blackqueue)
+	    np.random.shuffle(self.deck[1])
 	    self.deck[1]=np.concatenate((['d','f','f'],self.deck[1]))
 	    
 	    self.turns=0 #num of turns
@@ -118,10 +118,10 @@ class game:
 			3.not hindered by units (for slide and move)
 		after normal movement check, look up for commanding tiles and put additional cmd movement in
 		'''
-		
+		#can only place duke on T1
 		if self.turns == 1:
-			if self.player==1: vl=["oF1","oF2","oF3","oF4","oF5","oF6"]
-			if self.player==0: vl=["oA1","oA2","oA3","oA4","oA5","oA6"]
+			if self.player==0: vl=["oF1","oF2","oF3","oF4","oF5","oF6"]
+			if self.player==1: vl=["oA1","oA2","oA3","oA4","oA5","oA6"]
 			return
 		#do normal movement check	
 		for tile_start in self.board_dict.keys(): #--tuple
