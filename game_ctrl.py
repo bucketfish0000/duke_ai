@@ -10,6 +10,7 @@ class controller:
         if self.state=="idle":
             self.g.clear()
             self.g.player=0
+            #self.g.valid_moves=self.g.get_valid_moves(0)
             if (display): print(self.g.board_arr)
             if op=="new":
                 self.state="white_move"
