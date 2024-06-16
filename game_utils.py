@@ -201,19 +201,16 @@ class game:
 					u_op='m'
 					for tar in u.moves[u.side][move_type]:
 						dest = (tar[0]+tile_start[0],tar[1]+tile_start[1])
-						#print(dest)
 						if (dest[0]<0 or dest[0]>5 or dest[1]<0 or dest[1]>5) or self.is_friendly(player,dest):
 							#move cannot end up in out-of-bound or friendly tiles
 							continue
 						#move cannot be hindered
-						#print(dest)
 						hindered=False
 						line_cast=(tar[0]!=0,tar[1]!=0) #using the features that all official "move"s are on same line/row or on diag
 						check_dest=tile_start
 						while (check_dest != dest and self.is_inbound(check_dest)):
 							check_dest=(check_dest[0]+line_cast[0],check_dest[1]+line_cast[1])
 							if self.is_inbound(check_dest) and self.is_occupied(check_dest): hindered=True
-						#print(dest,hindered)
 						if (hindered): break
 						#anything reaching this line would be valid slide moves, translate and put into vl 
 						u_tar=self.position(coord=None,pair=dest)
@@ -242,7 +239,6 @@ class game:
 						hindered=False
 						while (self.is_inbound(dest) and hindered==False):
 							#can keep location if is within bound, empty
-							print(dest)
 							if (self.is_friendly(player,dest)):
 								hindered=True
 								break  
