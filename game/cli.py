@@ -8,10 +8,8 @@ def main():
 	gc=controller()
 	while(True):
 		cmd = input()
-		if (cmd=="moves"):
-			print(gc.g.get_valid_moves(gc.g.player))
-		else:
-			gc.proceed(cmd,display=True)
+		gc.input=cmd
+		_=gc.game_routine(display=True)
 			
 
 if __name__ == "__main__":

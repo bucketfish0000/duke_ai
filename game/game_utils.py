@@ -83,8 +83,10 @@ class game:
 
 		
 	def check_win(self):
-		if (self.board_arr.contains('d')==False): self.winner=1
-		elif (self.board_arr.contains('D')==False):self.winner=0
+		if self.turns>=3:
+			if ('d' in self.board_arr)==False: self.winner=1
+			elif ('D' in self.board_arr)==False:self.winner=0
+			else: self.winner=None
 
 	#utils
 	def position(self,coord=None,pair=None):
@@ -259,7 +261,7 @@ class game:
 						while (self.is_inbound(dest)): 
 							#can keep location if is within bound, empty
 							dest=(dest[0]+direction[0],dest[1]+direction[1])
-							if (self.is_friendly(player,dest)):
+							if (self.is_inbound(dest)==False or self.is_friendly(player,dest)):
 								continue
 							#anything reaching this line would be valid slide moves, translate and put into vl                       
 							u_tar=self.position(coord=None,pair=dest)
