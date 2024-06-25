@@ -77,3 +77,4 @@ class controller:
         
         self.state=self.next
         
+>>>>>>> d33d80e3a67599b1e6db5303592aa3ccea508bcf
